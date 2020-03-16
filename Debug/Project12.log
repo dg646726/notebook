@@ -1,0 +1,5 @@
+﻿  NoteBook.cpp
+  Source.cpp
+  Создание кода...
+D:\Visual Studio\Project12\Source.cpp(19,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  Project12.vcxproj -> D:\Visual Studio\Project12\Debug\Project12.exe
