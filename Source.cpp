@@ -10,8 +10,6 @@
 
 using namespace std;
 
-#define CLEAR system("cls");
-#define PAUSE system("pause");
 
 int main() {
 	setlocale(LC_CTYPE, "");

@@ -12,11 +12,12 @@ HANDLE color = GetStdHandle(STD_OUTPUT_HANDLE);
 
 #define CLEAR system("cls");
 #define PAUSE system("pause");
+#define ENDL cout<<endl;
+
 
 
 list<event_log> notebook;
 const string fileName = "NoteBook.txt";
-
 
 
 void init()
@@ -31,36 +32,50 @@ void init()
 	else {
 		int currentString = 0;
 		string data;
-		int data1=0;
+		int data1;
 		event_log oldNote;
 		while (!fin.eof()) {
 			currentString++;
-
-			getline(fin, data);
+			data1 = 0;
+			data = "";
 			if (currentString == 1) {
+				getline(fin, data);
+
 				oldNote.header = data;
 			}
 			else if (currentString == 2) {
+				getline(fin, data);
+
 				oldNote.description = data;
 
 			}
 			else if (currentString == 3) {
+				fin >> data1;
+
 				oldNote.time_event.minute = data1;
 
 			}
 			else if (currentString == 4) {
+				fin >> data1;
+
 				oldNote.time_event.hour = data1;
 
 			}
 			else if (currentString == 5) {
+				fin >> data1;
+
 				oldNote.time_event.day = data1;
 
 			}
 			else if (currentString == 6) {
+				fin >> data1;
+
 				oldNote.time_event.mounth = data1;
 
 			}
 			else {
+				fin >> data1;
+
 				oldNote.importance = data1;
 				currentString = 0;
 				notebook.push_back(oldNote);
@@ -93,7 +108,7 @@ void addNewNote()
 	notebook.push_back(newnote);
 	ofstream fout;
 	fout.open(fileName, fstream::app);
-	
+
 	bool isOpen = fout.is_open();
 	if (isOpen == false) {
 		cout << "Error: Application can't connecting to database file" << endl;
@@ -119,23 +134,36 @@ void ShowAllNote()
 {
 	for (event_log item : notebook)
 	{
-		if () {
-			if (item.importance == 1) {
-				SetConsoleTextAttribute(color, FOREGROUND_GREEN);
 
-				SetConsoleTextAttribute(color, FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
-			}
-			else if (item.importance == 2) {
-				SetConsoleTextAttribute(color, FOREGROUND_RED);
-
-				SetConsoleTextAttribute(color, FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
-			}
-			else {
-				SetConsoleTextAttribute(color, FOREGROUND_RED);
-
-				SetConsoleTextAttribute(color, FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
-			}
+		if (item.importance == 1) {
+			SetConsoleTextAttribute(color, FOREGROUND_GREEN);
+			cout << "Header:" <<item.header << endl;
+			cout << "Description:" << item.description << endl;
+			cout << "Time:" << item.time_event.minute << ":" << item.time_event.hour << endl;
+			cout << "Day:" << item.time_event.day << "." << item.time_event.mounth << endl;
+			ENDL
+			SetConsoleTextAttribute(color, FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
 		}
-	}
+		else if (item.importance == 2) {
+			SetConsoleTextAttribute(color, FOREGROUND_RED | FOREGROUND_GREEN);
+			cout << "Header:" << item.header << endl;
+			cout << "Description:" << item.description << endl;
+			cout << "Time:" << item.time_event.minute << ":" << item.time_event.hour << endl;
+			cout << "Day:" << item.time_event.day << "." << item.time_event.mounth << endl;
+			ENDL
+			SetConsoleTextAttribute(color, FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
+		}
+		else {
+			SetConsoleTextAttribute(color, FOREGROUND_RED);
+			cout << "Header:" << item.header << endl;
+			cout << "Description:" << item.description << endl;
+			cout << "Time:" << item.time_event.minute << ":" << item.time_event.hour << endl;
+			cout << "Day:" << item.time_event.day << "." << item.time_event.mounth << endl;
+			ENDL
+			SetConsoleTextAttribute(color, FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
+		}
 
+	}
+	PAUSE
+	CLEAR
 }
