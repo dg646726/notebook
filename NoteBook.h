@@ -15,7 +15,7 @@ struct date {
 
 
 struct event_log {
-
+	string category;
 	string header;
 	string description;
 	date time_event;
@@ -24,6 +24,7 @@ struct event_log {
 
 };
 
-void init();
-void addNewNote();
-void ShowAllNote();
+event_log* init(event_log* array, int *size);
+event_log* addNewNote(event_log* array, int *size);
+void ShowAllNote(event_log* array, int size);
+void ShowCategoryNote(event_log* array, int size);
